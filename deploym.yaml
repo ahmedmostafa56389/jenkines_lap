@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-lap
+spec:
+  selector:
+    matchLabels:
+      app: python
+  template:
+    metadata:
+      labels:
+        app: python
+
+    spec:
+      containers:
+       - name: python-app
+         image: nginx
+         ports:
+         - containerPort: 8080
