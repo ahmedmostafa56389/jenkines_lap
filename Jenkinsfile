@@ -2,7 +2,7 @@ pipeline{
   agent any
   
   environment{
-    Docker-cred  = 'DockerHub'
+    Dockercred  = 'DockerHub'
   }
 
   stages{
@@ -21,7 +21,7 @@ pipeline{
     stage('BUILD'){
       steps {
         script {
-          sh ' docker build -t ahmedmoo/nti:latest
+          sh ' docker build -t ahmedmoo/nti:latest'
           echo " image built "
         }
       }
@@ -32,7 +32,7 @@ pipeline{
       steps{
         script {
         		echo "pushing docker image ..."
-		      	withCredentials([usernamePassword(credentialsId: "${dockerHubCredentialsID}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+		      	withCredentials([usernamePassword(credentialsId: "${Dockercred}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
 		        		sh "docker login -u ${USERNAME} -p ${PASSWORD}"
         		}
              sh "docker push ahmedmoo/nti:latest
