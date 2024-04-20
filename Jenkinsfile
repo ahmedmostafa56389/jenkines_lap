@@ -2,14 +2,16 @@ pipeline{
   agent any
   
   environment{
+    imageName  = ' ahmedmoo/nti:latest
     Dockercred  = 'DockerHub'
+	
   }
 
   stages{
     
-    stage ('Test'){
-       steps{
-         script{
+    stage ('Test') {
+       steps {
+         script {
            echo " test running"
            sh 'pytest' // Run Python tests
        }
@@ -17,26 +19,26 @@ pipeline{
     }
 
     
-    stage('BUILD'){
+    stage('BUILD') {
       steps {
         script {
-          sh ' docker build -t ahmedmoo/nti:latest'
+          sh ' docker build -t ${imageName} .'
           echo " image built "
         }
       }
     }
 
     
-    stage('push'){
-      steps{
+    stage('push') {
+      steps {
         script {
-        		echo "pushing docker image ..."
-		      	withCredentials([usernamePassword(credentialsId: "${Dockercred}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
-		        		sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-        		}
-             sh "docker push ahmedmoo/nti:latest"
-      }
-    }
+        	echo "pushing docker image ..."
+		withCredentials([usernamePassword(credentialsId: "${Dockercred}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+		        sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+        	}
+                sh "docker push ahmedmoo/nti:latest"
+        }
+     }
    }
 }
 
