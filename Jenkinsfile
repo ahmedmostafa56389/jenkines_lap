@@ -10,8 +10,7 @@ pipeline{
     stage ('Test'){
        steps{
          script{
-           
-           sh 'pip install -r requirments.txt' //Install Python dependencies
+           echo " test running"
            sh 'pytest' // Run Python tests
        }
       }
