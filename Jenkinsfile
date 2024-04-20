@@ -35,7 +35,7 @@ pipeline{
 		      	withCredentials([usernamePassword(credentialsId: "${Dockercred}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
 		        		sh "docker login -u ${USERNAME} -p ${PASSWORD}"
         		}
-             sh "docker push ahmedmoo/nti:latest
+             sh "docker push ahmedmoo/nti:latest"
       }
     }
    }
