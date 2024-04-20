@@ -2,7 +2,7 @@ pipeline{
   agent any
   
   environment{
-    imageName  = ' ahmedmoo/nti:latest
+    imageName  = ' ahmedmoo/nti:latest '
     Dockercred  = 'DockerHub'
 	
   }
