@@ -1,3 +1,4 @@
+@Library('Jenkins-Shared-Library')_
 pipeline {
     agent any
     environment {
@@ -5,15 +6,23 @@ pipeline {
 	    	imageName = ' ahmedmoo/nti:latest '
             }
     
-    stages {
+ //   stages {
      
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    sh ' docker build -t ${imageName}  . '
-                }
-            }
-}
+   //     stage('Build Docker Image') {
+     //       steps {
+       //         script {
+         //           sh ' docker build -t ${imageName}  . '
+           //     }
+          //  }
+//}
+
+
+	stage(Build using shared-library) {
+		steps {
+			BuildDockerImage("${imageName}")
+		}
+	}
+		
 
         stage('Push Docker Image to Docker Hub') {
          
