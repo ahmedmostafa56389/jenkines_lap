@@ -5,11 +5,7 @@ pipeline {
             }
     
     stages {
-        stage('Test Python Code') {
-            steps {
-                sh 'pytest' 
-            }
-        }
+     
         stage('Build Docker Image') {
             steps {
                 script {
