@@ -1,57 +1,33 @@
-pipeline{
-  agent any
-  
-  environment{
-    imageName  = ' ahmedmoo/nti:latest '
-    Dockercred  = 'DockerHub'
-	
-  }
-
-  stages{
+pipeline {
+    agent any
     
-    stage ('Test') {
-       steps {
-         script {
-           echo " test running"
-           sh 'pytest' // Run Python tests
-       }
-      }
-    }
-
-    
-    stage('BUILD') {
-      steps {
-        script {
-          sh ' docker build -t ${imageName} .'
-          echo " image built "
+    stages {
+        stage('Test Python Code') {
+            steps {
+                sh 'pip install -r requirements.txt' // تثبيت تبعيات البايثون
+                sh 'pytest' // تشغيل اختبارات البايثون
+            }
         }
-      }
-    }
-
-    
-    stage('push') {
-      steps {
-        script {
-        	echo "pushing docker image ..."
-		withCredentials([usernamePassword(credentialsId: "${Dockercred}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
-		        sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-        	}
-                sh "docker push ${imageName}"
-        }
-     }
-   }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build('ahmedmoo/nti:latest') // بناء صورة دوكر
+                }
+            }
 }
 
-post { 
-  success {
-    echo " ahmed mostafa"
-  }
-  failure {
-    echo " fail yaa ibny"
-  }
+        stage('Push Docker Image to Docker Hub') {
+            environment {
+                DOCKERHUB_CREDENTIALS = credentials('DockerHub')
+            }
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+                        docker.image('ahmedmoo/nti:latest').push() // رفع الصورة إلى Docker Hub
+                    }
+                }
+            
 }
 }
-
-          
-      
-    
+}
+}
