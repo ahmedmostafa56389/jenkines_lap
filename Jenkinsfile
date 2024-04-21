@@ -14,16 +14,16 @@ pipeline {
             }
 }
 
-     //   stage('Push Docker Image to Docker Hub') {
+        stage('Push Docker Image to Docker Hub') {
          
-         //   steps {
-           //     script {
-             //       docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
-               //         docker.image('ahmedmoo/nti:latest').push() 
-                 //   }
-                //}
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+                        sh ' docker push ahmedmoo/nti:latest '
+                   }
+                }
             
-//}
-//}
+  }
+ }
 }
 }
