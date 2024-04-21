@@ -17,7 +17,7 @@ pipeline {
 //}
 
 
-	stage(Build using shared-library) {
+	stage('Build using shared-library') {
 		steps {
 			BuildDockerImage("${imageName}")
 		}
