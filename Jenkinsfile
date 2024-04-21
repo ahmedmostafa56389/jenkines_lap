@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     echo " pushing the image "
-                    withCredentials([usernamePassword(credentialsId: "${dockerHubCredentialsID}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+                    withCredentials([usernamePassword(credentialsId: "${Dockerhub}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
 				          sh "docker login -u ${USERNAME} -p ${PASSWORD}"
         		    }
                     sh " docker push ahmedmoo/nti:latest "
