@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
                 Dockerhub = 'DockerHub'
+	    	imageName = ' ahmedmoo/nti:latest '
             }
     
     stages {
@@ -9,7 +10,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh ' docker build -t ahmedmoo/nti:latest  . '
+                    sh ' docker build -t ${imageName}  . '
                 }
             }
 }
@@ -22,7 +23,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: "${Dockerhub}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
 				          sh "docker login -u ${USERNAME} -p ${PASSWORD}"
         		    }
-                    sh " docker push ahmedmoo/nti:latest "
+                    sh " docker push ${imageName} "
                    }
                 }
             
