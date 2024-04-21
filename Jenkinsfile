@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-                DOCKERHUB_CREDENTIALS = credentials('DockerHub')
+                Dockerhub = 'DockerHub'
             }
     
     stages {
@@ -18,8 +18,11 @@ pipeline {
          
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
-                        sh ' docker push ahmedmoo/nti:latest '
+                    echo " pushing the image "
+                    withCredintials([usernamePassword(credentialsId: "${Dockerhub}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+                        sh " docker login -u ${USERNAME} -p ${PASSWORD}"
+                    }
+                    sh " docker push ahmedmoo/nti:latest "
                    }
                 }
             
