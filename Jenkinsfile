@@ -4,14 +4,13 @@ pipeline {
     stages {
         stage('Test Python Code') {
             steps {
-                sh 'pip install -r requirements.txt' // تثبيت تبعيات البايثون
                 sh 'pytest' // تشغيل اختبارات البايثون
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('ahmedmoo/nti:latest') // بناء صورة دوكر
+                    docker.build('ahmedmoo/nti:latest') 
                 }
             }
 }
@@ -23,7 +22,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
-                        docker.image('ahmedmoo/nti:latest').push() // رفع الصورة إلى Docker Hub
+                        docker.image('ahmedmoo/nti:latest').push() 
                     }
                 }
             
