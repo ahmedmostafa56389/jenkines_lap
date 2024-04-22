@@ -1,4 +1,4 @@
-@Library('https://github.com/ahmedmostafa56389/shared_library.git')_
+@Library('shared-lib')_
 pipeline {
     agent any
     environment {
