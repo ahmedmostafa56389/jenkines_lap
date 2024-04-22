@@ -6,7 +6,7 @@ pipeline {
 	    	imageName = ' ahmedmoo/nti:latest '
             }
     
- //   stages {
+     stages {
      
    //     stage('Build Docker Image') {
      //       steps {
@@ -35,7 +35,7 @@ pipeline {
                     sh " docker push ${imageName} "
                    }
                 }
-            
+	}     
   }
  }
 
