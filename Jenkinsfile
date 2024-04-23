@@ -42,6 +42,13 @@ pipeline {
 			PushDockerimage("${Dockerhub}","${imageName}")
 		}
 	}
+
+	stage ('EditImageName') {
+		steps {
+			EditImageName("${imagName}")
+		}
+	}
+	     
   }
  }
 
