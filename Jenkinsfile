@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
                 Dockerhub = 'DockerHub'
-	    	imageName = ' ahmedmoo/nti:${BUILD_NUMBER'
+	    	imageName = ' ahmedmoo/nti'
             }
     
      stages {
