@@ -43,12 +43,20 @@ pipeline {
 		}
 	}
 
-	stage ('EditImageName') {
+//	stage ('EditImageName') {
+//		steps {
+//			EditImageName("${imagName}")
+//		}
+//	}
+
+
+	stage ('Editin the image name') {
 		steps {
-			EditImageName("${imagName}")
+			script {
+				  sh "sed -i 's|image:.*|image: ahmedmoo/nti:v1 |g' deploym.yaml"
+			}
 		}
 	}
-	     
   }
  }
 
