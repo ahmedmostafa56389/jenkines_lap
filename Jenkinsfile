@@ -53,7 +53,9 @@ pipeline {
 	stage ('Editin the image name') {
 		steps {
 			script {
-				  sh "sed -i 's|image:.*|image: ahmedmoo/nti:${BUILD_NUMBER} |g' deploym.yaml"
+
+				   dir('.')	
+					  sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER} |g' deploym.yaml"
 			}
 		}
 	}
