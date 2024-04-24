@@ -54,8 +54,10 @@ pipeline {
 		steps {
 			script {
 
-				   dir('.')	
+				   dir('.') {	
 					  sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER} |g' deploym.yaml"
+			
+				   }
 			}
 		}
 	}
