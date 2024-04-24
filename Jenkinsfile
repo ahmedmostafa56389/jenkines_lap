@@ -47,7 +47,7 @@ pipeline {
 //	stage ('EditImageName') {
 //		steps {
 //			script {
-//				dir ('.') {
+//				dir ('k8s') {
 //					EditImageName("${imagName}")
 //				}
 //			}
@@ -69,17 +69,28 @@ pipeline {
 		}
 	}
 
-	stage (' deploy ' ) {
-		steps {
-			script {
-				  withCredentials([file(credentialsId: "${k8s}", variable: 'KUBECONFIG_FILE')]) {
-  					      sh "export KUBECONFIG=${KUBECONFIG_FILE} && kubectl apply -f ./k8s"
-			          }
-			}
-		}
-	}
+//	stage (' deploy ' ) {
+//		steps {
+//			script {
+//				  withCredentials([file(credentialsId: "${k8s}", variable: 'KUBECONFIG_FILE')]) {
+//					      sh "export KUBECONFIG=${KUBECONFIG_FILE} && kubectl apply -f ./k8s"
+//			          }
+//			}
+//		}
+//	}
 				
-  }
+  
+  	stage ( ' deploy ' ) {
+	     steps { 
+		     script {
+			     dir ('k8s') {
+			     		Deployk8s ("${k8s}")
+		     	     }
+		     }
+	     }
+	}
+     
+     }
  }
 
 
