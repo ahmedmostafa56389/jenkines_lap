@@ -4,6 +4,7 @@ pipeline {
     environment {
                 Dockerhub = 'DockerHub'
 	    	imageName = ' ahmedmoo/nti'
+	    	k8s = ' KubeCred '
             }
     
      stages {
@@ -67,6 +68,17 @@ pipeline {
 			}
 		}
 	}
+
+	stage (' deploy ' ) {
+		steps {
+			script {
+				withCredentials([file(credentialId: "${k8s}", variable: 'KUBECONFIG_FILE')]) {
+					sh " export KUBECONFIG=${KUBECONFIG_FILE} && kubectl apply -f ./k8s "
+				}
+			}
+		}
+	}
+				
   }
  }
 
