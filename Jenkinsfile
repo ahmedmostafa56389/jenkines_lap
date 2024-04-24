@@ -43,11 +43,11 @@ pipeline {
 		}
 	}
 
-//	stage ('EditImageName') {
-//		steps {
-//			EditImageName("${imagName}")
-//		}
-//	}
+	stage ('EditImageName') {
+		steps {
+			EditImageName("${imagName}")
+		}
+	}
 	     
   }
  }
