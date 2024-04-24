@@ -84,7 +84,7 @@ pipeline {
 	     steps { 
 		     script {
 			     dir ('k8s') {
-			     		Deployk8s ("${k8s}")
+			     		Deployonk8s ("${k8s}")
 		     	     }
 		     }
 	     }
