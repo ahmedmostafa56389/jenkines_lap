@@ -60,7 +60,7 @@ pipeline {
 		steps {
 			script {
 
-				   dir('.') {	
+				   dir('k8s') {	
 					  sh "sed -i 's|image:.*|image: ${imageName}|g' deploym.yaml"
 			
 				   }
