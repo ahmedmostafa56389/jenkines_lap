@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
                 Dockerhub = 'DockerHub'
-	    	imageName = ' ahmedmoo/nti:latest '
+	    	imageName = ' ahmedmoo/nti:${BUILD_NUMBER'
             }
     
      stages {
@@ -55,7 +55,7 @@ pipeline {
 			script {
 
 				   dir('.') {	
-					  sh "sed -i 's|image:.*|image: ${imageName}:${BUILD_NUMBER} |g' deploym.yaml"
+					  sh "sed -i 's|image:.*|image: ${imageName}|g' deploym.yaml"
 			
 				   }
 			}
