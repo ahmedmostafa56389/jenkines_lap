@@ -43,24 +43,30 @@ pipeline {
 		}
 	}
 
-//	stage ('EditImageName') {
-//		steps {
-//			EditImageName("${imagName}")
-//		}
-//	}
-
-
-	stage ('Editin the image name') {
+	stage ('EditImageName') {
 		steps {
 			script {
-
-				   dir('.') {	
-					  sh "sed -i 's|image:.*|image: ${imageName}|g' deploym.yaml"
-			
-				   }
+				dir ('.') {
+					EditImageName("${imagName}")
+				}
 			}
+		
+			
 		}
 	}
+
+
+//	stage ('Editin the image name') {
+//		steps {
+//			script {
+
+//				   dir('.') {	
+//					  sh "sed -i 's|image:.*|image: ${imageName}|g' deploym.yaml"
+//			
+//				   }
+//			}
+//		}
+//	}
   }
  }
 
