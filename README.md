@@ -34,6 +34,7 @@ The Jenkins pipeline consists of the following stages:
 ## Shared Library
 - **Usage:**
   - The pipeline leverages a shared library hosted in another repository for reusable functions and utilities.
+    https://github.com/ahmedmostafa56389/shared_library.git
 
 ## Conclusion
 This Jenkins pipeline streamlines the deployment process of a Python application by automating various stages from testing to deployment. By integrating with Docker Hub and Kubernetes, it ensures seamless authentication and deployment to target environments. The use of a shared library enhances code reuse and maintainability, contributing to the efficiency and scalability of the deployment process.
